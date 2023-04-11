@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Review;
 use App\Models\Comment;
 use App\Models\Op;
+use App\Models\User;
+use App\Models\ApproveReview;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,15 @@ Route::get('/op', function (){
     $op = Op::all();
     return $op;
 });
+
+
+Route::get('/user', function (){
+    $user = User::all();
+    return $user;
+});
+
+Route::get('/approve', function (){
+    $approve =ApproveReview::all();
+    return $approve;
+});
+
