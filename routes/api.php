@@ -7,6 +7,10 @@ use App\Models\Comment;
 use App\Models\Op;
 use App\Models\User;
 use App\Models\ApproveReview;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OpController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +52,11 @@ Route::get('/approve', function (){
     return $approve;
 });
 
+
+Route::post('/user', [UserController::class, 'addUser']);
+Route::post('/op', [OpController::class, 'addOp']);
+Route::post("/review", [ReviewController::class, 'addReview']);
+Route::post("/deleteReview", [ReviewController::class, 'deleteReview']);
+Route::post("/deleteOp", [OpController::class, 'deleteOp']);
+Route::post("/deleteUser", [UserController::class, 'deleteUser']);
+Route::post('/upload', [FileController::class, 'uploadFile']);
