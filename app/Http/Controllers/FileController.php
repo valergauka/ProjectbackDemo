@@ -7,22 +7,24 @@ use App\Models\File;
 
 class FileController extends Controller
 {
-    public function uploadFile(Request $request)
+    public function uploadFiles(Request $request)
     {
-        $files = [];
-        for ($i=1; $i<=6; $i++) {
-            $file = $request->file("file_$i");
-            if ($file) {
-                $fileName = $file->getClientOriginalName();
-                $filePath = $file->storeAs('uploads', $fileName, 'public');
-                $files["file_$i"] = $filePath;
+        $uploadedFiles = [];
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                // Збереження файлу та отримання інформації про нього
+                $path = $file->store('uploads'); // Збереження файлу у вказаній директорії
+                $name = $file->getClientOriginalName(); // Отримання оригінальної назви файлу
+
+                // Збереження інформації про файл у базі даних
+                $uploadedFiles[] = File::create([
+                    'name' => $name,
+                    'path' => $path
+                ]);
             }
         }
 
-        $row = new File();
-        $row->fill($files);
-        $row->idReview=$request->input('idReview');
-        $row->save();
-        return response()->json(['success' => false, 'message' => 'No files uploaded.']);
+        return response()->json($uploadedFiles);
     }
 }

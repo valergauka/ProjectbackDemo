@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OpController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ApproveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,39 +25,35 @@ use App\Http\Controllers\FileController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    return $request->user();});
+
 Route::get('/review', function (){
     $review = Review::all();
-    return $review;
-});
+    return $review;});
 
 Route::get('/comment', function (){
     $comment = Comment::all();
-    return $comment;
-});
+    return $comment;});
 
 Route::get('/op', function (){
     $op = Op::all();
-    return $op;
-});
+    return $op;});
 
 
 Route::get('/user', function (){
     $user = User::all();
-    return $user;
-});
+    return $user;});
 
 Route::get('/approve', function (){
     $approve =ApproveReview::all();
-    return $approve;
-});
+    return $approve;});
 
 
 Route::post('/user', [UserController::class, 'addUser']);
 Route::post('/op', [OpController::class, 'addOp']);
 Route::post("/review", [ReviewController::class, 'addReview']);
+Route::post('/approve', [ApproveController::class, 'addApprove']);
 Route::post("/deleteReview", [ReviewController::class, 'deleteReview']);
 Route::post("/deleteOp", [OpController::class, 'deleteOp']);
 Route::post("/deleteUser", [UserController::class, 'deleteUser']);
-Route::post('/upload', [FileController::class, 'uploadFile']);
+Route::post('/upload-files', [FileController::class, 'uploadFiles']);

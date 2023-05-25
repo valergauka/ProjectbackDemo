@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Op;
-use App\Models\Review;
 use Illuminate\Http\Request;
 
 class OpController extends Controller
@@ -14,7 +13,7 @@ class OpController extends Controller
         $op->branch = $request->input('branch');
         $op->speciality = $request->input('speciality');
         $op->specialisation = $request->input('specialisation');
-        $op->op = $request->input('op');
+        $op->opName = $request->input('op');
         $op->save();
         return response()->json(['success' => true]);
     }

@@ -23,6 +23,7 @@ class ReviewController extends Controller
         $review->save();
         return response()->json(['success' => true]);
     }
+
     public function deleteReview(Request $request)
     {
         $review=Review::query()->findOrFail($request->get('id'));
